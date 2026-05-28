@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Artizen - Pasif Gelirli Sanat Topluluğu</title>
+    <style>
+        body { background-color: #121212; color: white; font-family: sans-serif; margin: 0; padding: 20px; }
+        header { text-align: center; padding: 20px; background: #1e1e1e; border-radius: 10px; margin-bottom: 20px; }
+        .baraj-bilgi { color: #00ffcc; font-weight: bold; }
+        
+        /* PINTEREST TARZI MASONRY GRID (YAPBOZ) DÜZENİ */
+        .pinterest-grid {
+            column-count: 3; gap: 15px; width: 100%; max-width: 1200px; margin: 0 auto;
+        }
+        @media (max-width: 800px) { .pinterest-grid { column-count: 2; } }
+        
+        .kart {
+            background: #1e1e1e; border-radius: 16px; overflow: hidden;
+            margin-bottom: 15px; break-inside: avoid; position: relative;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5); transition: 0.3s;
+        }
+        .kart:hover { transform: scale(1.02); }
+        .kart img { width: 100%; height: auto; display: block; }
+        
+        .kart-bilgi { padding: 12px; font-size: 14px; }
+        .izlenme { color: #aaa; }
+        .komisyon { color: #ff3366; font-weight: bold; float: right; }
+        
+        .yukleme-kutusu { background: #1e1e1e; padding: 20px; border-radius: 10px; text-align: center; margin-bottom: 30px; }
+        .btn { background: #ff3366; color: white; padding: 10px 20px; border: none; border-radius: 20px; cursor: pointer; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🚀 Artizen Keşfet</h1>
+        <p class="baraj-bilgi">🎯 Bu Haftanın Viral İzlenme Barajı: {{ baraj }} izlenme</p>
+    </header>
+
+    <div class="yukleme-kutusu">
+        <h3>🎨 Kendi Eserini Yükle (Pasif Gelir Kazanmaya Başla)</h3>
+        <form action="/yukle" method="post" enctype="multipart/form-data">
+            <input type="file" name="dosya" accept="image/*" required>
+            <button type="submit" class="btn">Sitede Yayınla</button>
+        </form>
+    </div>
+
+    <div class="pinterest-grid">
+        {% for resim in resimler %}
+        <div class="kart">
+            <img src="{{ resim.url }}" alt="Sanat Eseri">
+            <div class="kart-bilgi">
+                <span class="izlenme">👁️ {{ resim.izlenme }} izlenme</span>
+                <span class="komisyon">💰 %{{ resim.komisyon }} Komisyon</span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</body>
+</html>
