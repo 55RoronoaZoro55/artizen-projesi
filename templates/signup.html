@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <style>
+        body { background: #121212; color: white; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: sans-serif; }
+        .form-box { background: #1e1e1e; padding: 40px; border-radius: 12px; width: 350px; }
+        input[type="text"], input[type="email"], input[type="password"] { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: none; box-sizing: border-box; }
+        .checkbox-group { font-size: 0.8rem; margin: 10px 0; text-align: left; }
+        button { background: #e91e63; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="form-box">
+        <h2>Sign Up</h2>
+        <form method="POST">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="email" name="email" placeholder="Email Address" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+            
+            <div class="checkbox-group">
+                <input type="checkbox" name="terms" required> I accept the Terms of Service.<br>
+                <input type="checkbox" name="marketing"> I agree to receive marketing emails.
+            </div>
+            
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+</body>
+</html>
