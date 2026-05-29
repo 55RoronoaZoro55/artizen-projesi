@@ -2,60 +2,183 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Artizen - Pasif Gelirli Sanat Topluluğu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artizen - Pasif Gelirli Sanat Pazaryeri</title>
     <style>
-        body { background-color: #121212; color: white; font-family: sans-serif; margin: 0; padding: 20px; }
-        header { text-align: center; padding: 20px; background: #1e1e1e; border-radius: 10px; margin-bottom: 20px; }
-        .baraj-bilgi { color: #00ffcc; font-weight: bold; }
-        
-        /* PINTEREST TARZI MASONRY GRID (YAPBOZ) DÜZENİ */
-        .pinterest-grid {
-            column-count: 3; gap: 15px; width: 100%; max-width: 1200px; margin: 0 auto;
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        @media (max-width: 800px) { .pinterest-grid { column-count: 2; } }
-        
-        .kart {
-            background: #1e1e1e; border-radius: 16px; overflow: hidden;
-            margin-bottom: 15px; break-inside: avoid; position: relative;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5); transition: 0.3s;
+
+        .header-container {
+            width: 100%;
+            max-width: 1200px;
+            background-color: #1e1e1e;
+            border-radius: 12px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+            box-sizing: border-box;
         }
-        .kart:hover { transform: scale(1.02); }
-        .kart img { width: 100%; height: auto; display: block; }
-        
-        .kart-bilgi { padding: 12px; font-size: 14px; }
-        .izlenme { color: #aaa; }
-        .komisyon { color: #ff3366; font-weight: bold; float: right; }
-        
-        .yukleme-kutusu { background: #1e1e1e; padding: 20px; border-radius: 10px; text-align: center; margin-bottom: 30px; }
-        .btn { background: #ff3366; color: white; padding: 10px 20px; border: none; border-radius: 20px; cursor: pointer; font-weight: bold; }
+
+        /* Logonun boyutu ve ortalanması */
+        .site-logo {
+            max-width: 130px;
+            height: auto;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .header-container h1 {
+            margin: 0;
+            font-size: 2.6rem;
+            letter-spacing: 3px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff, #a18cd1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-container p {
+            margin: 5px 0 0 0;
+            color: #d15a3c;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .viral-bar {
+            margin-top: 15px;
+            color: #00ffcc;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .upload-container {
+            width: 100%;
+            max-width: 1200px;
+            background-color: #1e1e1e;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            margin-bottom: 30px;
+            box-sizing: border-box;
+        }
+
+        .upload-container h3 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .btn-yayinla {
+            background-color: #e91e63;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .art-card {
+            background-color: #1e1e1e;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .art-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            aspect-ratio: 3/4;
+        }
+
+        .card-footer {
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            background-color: #181818;
+        }
+
+        .views {
+            color: #aaaaaa;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .commission {
+            color: #e91e63;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>🚀 Artizen Keşfet</h1>
-        <p class="baraj-bilgi">🎯 Bu Haftanın Viral İzlenme Barajı: {{ baraj }} izlenme</p>
+    <header class="header-container">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAAFYCAYAAAC0V9qjAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAMHREbU1FAAEAAAAnAAAAJwEBAQAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8AALAAAnAABAAEA/wAFAAAAAQAAAP8ADAAAAAEAAAD/ABEAAAABAAAA/wAWAAAAAQAAAP8AGwAAAAEAAAD/ACAAAAABAAAA/wAlAAAAAQAAAP+AKgAAAAEAAAD/+Mjg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg/8AAEQgBVgKcAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKV1ldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6onq8fLz9PX29fd356f36fxAAgEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoLEQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29fd356f36f/aAAwDAQACE MEMBERSHIP" alt="Artizen Logo" class="site-logo">
+        <h1>ARTİZEN</h1>
+        <p>Keşfet</p>
+        <div class="viral-bar">🎯 Bu Haftanın Viral İzlenme Barajı: 1000 izlenme</div>
     </header>
 
-    <div class="yukleme-kutusu">
+    <section class="upload-container">
         <h3>🎨 Kendi Eserini Yükle (Pasif Gelir Kazanmaya Başla)</h3>
-        <form action="/yukle" method="post" enctype="multipart/form-data">
-            <input type="file" name="dosya" accept="image/*" required>
-            <button type="submit" class="btn">Sitede Yayınla</button>
+        <form>
+            <input type="file" id="file-upload">
+            <button type="button" class="btn-yayinla">Sitede Yayınla</button>
         </form>
-    </div>
+    </section>
 
-    <div class="pinterest-grid">
-        {% for resim in resimler %}
-        <div class="kart">
-            <img src="{{ resim.url }}" alt="Sanat Eseri">
-            <div class="kart-bilgi">
-                <span class="izlenme">👁️ {{ resim.izlenme }} izlenme</span>
-                <span class="komisyon">💰 %{{ resim.komisyon }} Komisyon</span>
+    <main class="gallery-grid">
+        <div class="art-card">
+            <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=600" alt="Sanat Eseri" class="art-image">
+            <div class="card-footer">
+                <span class="views">👁️ 4500 izlenme</span>
+                <span class="commission">💰 %20 Komisyon</span>
             </div>
         </div>
-        {% endfor %}
-    </div>
+
+        <div class="art-card">
+            <img src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=600" alt="Sanat Eseri" class="art-image">
+            <div class="card-footer">
+                <span class="views">👁️ 1200 izlenme</span>
+                <span class="commission">💰 %10 Komisyon</span>
+            </div>
+        </div>
+
+        <div class="art-card">
+            <img src="https://images.unsplash.com/photo-1547891654-e66ed7edd96c?w=600" alt="Sanat Eseri" class="art-image">
+            <div class="card-footer">
+                <span class="views">👁️ 800 izlenme</span>
+                <span class="commission">💰 %10 Komisyon</span>
+            </div>
+        </div>
+    </main>
 
 </body>
 </html>
