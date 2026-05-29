@@ -7,13 +7,9 @@
     <style>
         body { background-color: #121212; color: #ffffff; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
         
-        .header-container { 
-            width: 100%; max-width: 1200px; background-color: #1e1e1e; border-radius: 12px; 
-            padding: 40px 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.5); 
-            margin-bottom: 20px; position: relative; 
-        }
+        .header-container { width: 100%; max-width: 1200px; background-color: #1e1e1e; border-radius: 12px; padding: 40px 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.5); margin-bottom: 20px; position: relative; }
 
-        /* Navigasyon */
+        /* Navigasyon - Güncellendi */
         .auth-nav { position: absolute; top: 20px; right: 20px; display: flex; gap: 15px; }
         .nav-btn { color: white; text-decoration: none; font-size: 0.9rem; padding: 8px 15px; border: 1px solid #444; border-radius: 20px; transition: 0.3s; }
         .nav-btn:hover { background: #333; }
@@ -30,14 +26,21 @@
         .art-card { background-color: #1e1e1e; border-radius: 12px; overflow: hidden; }
         .art-image { width: 100%; aspect-ratio: 3/4; object-fit: cover; }
         .card-footer { padding: 15px; display: flex; justify-content: space-between; font-size: 0.9rem; background-color: #181818; }
+
+        /* Çerez Banner Stili */
+        #cookie-banner { position: fixed; bottom: 0; width: 100%; background: #2c3e50; padding: 15px; text-align: center; border-top: 2px solid #e91e63; z-index: 1000; }
     </style>
 </head>
 <body>
 
     <header class="header-container">
         <nav class="auth-nav">
-            <a href="/login" class="nav-btn">Log In</a>
-            <a href="/signup" class="nav-btn signup-btn">Sign Up</a>
+            {% if 'user_id' in session %}
+                <span style="margin-right: 15px;">Merhaba, {{ session['username'] }}</span>
+                <a href="/logout" class="nav-btn">Çıkış Yap</a>
+            {% else %}
+                <a href="/signup" class="nav-btn signup-btn">Sign Up</a>
+            {% endif %}
         </nav>
         <img src="{{ url_for('static', filename='logo.png') }}" alt="Artizen Logo" class="site-logo">
         <h1>ARTİZEN</h1>
@@ -57,5 +60,19 @@
         </div>
     </main>
 
+    <div id="cookie-banner">
+        Sitemiz deneyimini iyileştirmek için çerezleri kullanır. 
+        <button onclick="acceptCookies()" style="background:#e91e63; border:none; color:white; padding:5px 15px; cursor:pointer; border-radius:5px;">Kabul Et</button>
+    </div>
+
+    <script>
+        function acceptCookies() {
+            document.getElementById('cookie-banner').style.display = 'none';
+            localStorage.setItem('cookies_accepted', 'true');
+        }
+        if(localStorage.getItem('cookies_accepted') === 'true') {
+            document.getElementById('cookie-banner').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
