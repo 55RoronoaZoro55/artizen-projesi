@@ -7,17 +7,13 @@
         body { background: #121212; color: white; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: sans-serif; margin: 0; }
         .form-box { background: #1e1e1e; padding: 40px; border-radius: 12px; width: 350px; text-align: center; }
         input[type="text"], input[type="email"], input[type="password"] { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: none; box-sizing: border-box; }
-        
         .checkbox-group { font-size: 0.9rem; margin: 15px 0; text-align: left; }
         .checkbox-item { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-        .checkbox-item input { width: auto; margin: 0; }
-        
         button { background: #e91e63; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold; margin-top: 10px; }
         a { color: #00ffcc; cursor: pointer; text-decoration: underline; }
     </style>
 </head>
 <body>
-
     <div class="form-box">
         <h2>Sign Up</h2>
         <form method="POST">
@@ -29,34 +25,15 @@
             <div class="checkbox-group">
                 <div class="checkbox-item">
                     <input type="checkbox" name="terms" required> 
-                    <span>I accept the <a onclick="openModal('terms-modal')">Terms of Service</a>.</span>
+                    <span>I accept the <a href="/terms" target="_blank">Terms of Service</a>.</span>
                 </div>
                 <div class="checkbox-item">
                     <input type="checkbox" name="marketing"> 
-                    <span>I agree to the <a onclick="openModal('privacy-modal')">Privacy & Marketing Policy</a>.</span>
+                    <span>I agree to the <a href="/privacy" target="_blank">Privacy & Marketing Policy</a>.</span>
                 </div>
             </div>
-            
             <button type="submit">Sign Up</button>
         </form>
     </div>
-
-    <div id="terms-modal" style="display:none; position:fixed; top:20%; left:10%; width:80%; background:#222; padding:20px; border-radius:10px; color:white; border: 1px solid #444;">
-        <h3>Terms of Service</h3>
-        <p>By using Artizen, you agree to comply with all applicable laws. You are responsible for the content you upload and own the necessary rights. Artizen is not liable for user-generated copyright issues.</p>
-        <button onclick="closeModal('terms-modal')">Close</button>
-    </div>
-
-    <div id="privacy-modal" style="display:none; position:fixed; top:20%; left:10%; width:80%; background:#222; padding:20px; border-radius:10px; color:white; border: 1px solid #444;">
-        <h3>Privacy & Marketing</h3>
-        <p>We value your privacy. Your email is used for account verification and updates. We do not sell your personal data. You can opt-out of marketing emails at any time.</p>
-        <button onclick="closeModal('privacy-modal')">Close</button>
-    </div>
-
-    <script>
-        function openModal(id) { document.getElementById(id).style.display = 'block'; }
-        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-    </script>
-
 </body>
 </html>
