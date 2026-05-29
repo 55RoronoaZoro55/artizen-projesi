@@ -5,13 +5,15 @@
     <title>Sign Up</title>
     <style>
         body { background: #121212; color: white; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: sans-serif; }
-        .form-box { background: #1e1e1e; padding: 40px; border-radius: 12px; width: 350px; }
-        input[type="text"], input[type="email"], input[type="password"] { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: none; box-sizing: border-box; }
-        .checkbox-group { font-size: 0.8rem; margin: 10px 0; text-align: left; }
-        button { background: #e91e63; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold; }
+        .form-box { background: #1e1e1e; padding: 40px; border-radius: 12px; width: 350px; text-align: center; }
+        input { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: none; box-sizing: border-box; }
+        .checkbox-group { font-size: 0.8rem; margin: 10px 0; text-align: left; line-height: 1.6; }
+        button { background: #e91e63; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold; margin-top: 10px; }
+        a { color: #00ffcc; cursor: pointer; text-decoration: underline; }
     </style>
 </head>
 <body>
+
     <div class="form-box">
         <h2>Sign Up</h2>
         <form method="POST">
@@ -21,12 +23,32 @@
             <input type="password" name="confirm_password" placeholder="Confirm Password" required>
             
             <div class="checkbox-group">
-                <input type="checkbox" name="terms" required> I accept the Terms of Service.<br>
-                <input type="checkbox" name="marketing"> I agree to receive marketing emails.
+                <input type="checkbox" name="terms" required> 
+                I accept the <a onclick="openModal('terms-modal')">Terms of Service</a>.<br>
+                <input type="checkbox" name="marketing"> 
+                I agree to the <a onclick="openModal('privacy-modal')">Privacy & Marketing Policy</a>.
             </div>
             
             <button type="submit">Sign Up</button>
         </form>
     </div>
+
+    <div id="terms-modal" style="display:none; position:fixed; top:20%; left:10%; width:80%; background:#222; padding:20px; border-radius:10px; color:white; border: 1px solid #444;">
+        <h3>Terms of Service</h3>
+        <p>By using Artizen, you agree to comply with all applicable laws. You are responsible for the content you upload and own the necessary rights. Artizen is not liable for user-generated copyright issues.</p>
+        <button onclick="closeModal('terms-modal')">Close</button>
+    </div>
+
+    <div id="privacy-modal" style="display:none; position:fixed; top:20%; left:10%; width:80%; background:#222; padding:20px; border-radius:10px; color:white; border: 1px solid #444;">
+        <h3>Privacy & Marketing</h3>
+        <p>We value your privacy. Your email is used for account verification and updates. We do not sell your personal data. You can opt-out of marketing emails at any time.</p>
+        <button onclick="closeModal('privacy-modal')">Close</button>
+    </div>
+
+    <script>
+        function openModal(id) { document.getElementById(id).style.display = 'block'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+    </script>
+
 </body>
 </html>
