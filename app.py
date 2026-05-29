@@ -1,49 +1,51 @@
-from flask import Flask, render_template, request
-from models import db # models.py dosyasından db'yi çağırıyoruz
+from flask import Flask, render_template, request, flash, redirect, url_for
+from models import db, User
+from werkzeug.security import generate_password_hash # Şifreleri güvenli hale getirmek için
 
 app = Flask(__name__)
+app.secret_key = 'gizli-anahtar-buraya' # Flash mesajları için gerekli
 
-# Veritabanı yapılandırması
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-# Veritabanını uygulamaya bağla
 db.init_app(app)
 
-# Tabloları oluştur (Uygulama ilk başladığında çalışır)
 with app.app_context():
     db.create_all()
 
-# Ana sayfa
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-# Kayıt sayfası (Sign Up)
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
-        # Formdan gelen verileri al
         username = request.form.get('username')
         email = request.form.get('email')
         password = request.form.get('password')
-        # ... burada kullanıcıyı veritabanına ekleme kodları gelecek
-        return "Sign Up form received and ready to save!"
+        confirm_password = request.form.get('confirm_password')
+        terms = request.form.get('terms')
+
+        # 1. Hukuki Onay Kontrolü
+        if not terms:
+            return "Hata: Kayıt olabilmek için Hizmet Şartlarını kabul etmelisiniz!"
+
+        # 2. Şifre Eşleşme Kontrolü
+        if password != confirm_password:
+            return "Hata: Şifreler birbiriyle eşleşmiyor!"
+
+        # 3. Veritabanı (Zaten kayıtlı mı?) Kontrolü
+        user_exists = User.query.filter((User.username == username) | (User.email == email)).first()
+        if user_exists:
+            return "Bu kullanıcı adı veya e-posta zaten kullanımda!"
+
+        # 4. Kayıt İşlemi (Şifreyi hash'leyerek kaydet)
+        hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
+        new_user = User(username=username, email=email, password=hashed_password)
+        
+        db.session.add(new_user)
+        db.session.commit()
+        
+        return "Kayıt başarıyla oluşturuldu! E-posta doğrulama adımına geçebilirsiniz."
+
     return render_template('signup.html')
 
-# Giriş sayfası (Log In)
-@app.route('/login')
-def login():
-    return render_template('login.html')
-
-# Hukuki Sayfalar
-@app.route('/terms')
-def terms():
-    return render_template('terms.html')
-
-@app.route('/privacy')
-def privacy():
-    return render_template('privacy.html')
-
+# Diğer rotaların aynı kalabilir...
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,39 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Sign Up</title>
-    <style>
-        body { background: #121212; color: white; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: sans-serif; margin: 0; }
-        .form-box { background: #1e1e1e; padding: 40px; border-radius: 12px; width: 350px; text-align: center; }
-        input[type="text"], input[type="email"], input[type="password"] { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: none; box-sizing: border-box; }
-        .checkbox-group { font-size: 0.9rem; margin: 15px 0; text-align: left; }
-        .checkbox-item { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-        button { background: #e91e63; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold; margin-top: 10px; }
-        a { color: #00ffcc; cursor: pointer; text-decoration: underline; }
-    </style>
+    <title>Kayıt Ol - Artizen</title>
 </head>
 <body>
-    <div class="form-box">
-        <h2>Sign Up</h2>
-        <form method="POST">
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="email" name="email" placeholder="Email Address" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <input type="password" name="confirm_password" placeholder="Confirm Password" required>
-            
-            <div class="checkbox-group">
-                <div class="checkbox-item">
-                    <input type="checkbox" name="terms" required> 
-                    <span>I accept the <a href="/terms" target="_blank">Terms of Service</a>.</span>
-                </div>
-                <div class="checkbox-item">
-                    <input type="checkbox" name="marketing"> 
-                    <span>I agree to the <a href="/privacy" target="_blank">Privacy & Marketing Policy</a>.</span>
-                </div>
-            </div>
-            <button type="submit">Sign Up</button>
-        </form>
-    </div>
+
+    <h2>Hesap Oluştur</h2>
+
+    <form action="/signup" method="POST">
+        <input type="text" name="username" placeholder="Kullanıcı Adı" required>
+        <br><br>
+
+        <input type="email" name="email" placeholder="E-posta" required>
+        <br><br>
+
+        <input type="password" id="password" name="password" placeholder="Şifre" required>
+        <br><br>
+
+        <input type="password" id="confirm_password" name="confirm_password" placeholder="Şifre Tekrar" required oninput="check(this)">
+        <br><br>
+
+        <input type="checkbox" name="terms" id="terms" required>
+        <label for="terms">
+            <a href="/terms" target="_blank">Hizmet Şartlarını</a> ve 
+            <a href="/privacy" target="_blank">Gizlilik Politikasını</a> okudum ve kabul ediyorum.
+        </label>
+        <br><br>
+
+        <button type="submit">Kayıt Ol</button>
+    </form>
+
+    <script>
+        // Şifreler eşleşiyor mu kontrolü
+        function check(input) {
+            if (input.value != document.getElementById('password').value) {
+                input.setCustomValidity('Şifreler eşleşmiyor!');
+            } else {
+                input.setCustomValidity('');
+            }
+        }
+    </script>
+
 </body>
 </html>
