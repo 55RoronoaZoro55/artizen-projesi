@@ -1,41 +1,41 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Kayıt Ol - Artizen</title>
+    <title>Sign Up - Artizen</title>
 </head>
 <body>
 
-    <h2>Hesap Oluştur</h2>
+    <h2>Create an Account</h2>
 
     <form action="/signup" method="POST">
-        <input type="text" name="username" placeholder="Kullanıcı Adı" required>
+        <input type="text" name="username" placeholder="Username" required>
         <br><br>
 
-        <input type="email" name="email" placeholder="E-posta" required>
+        <input type="email" name="email" placeholder="Email" required>
         <br><br>
 
-        <input type="password" id="password" name="password" placeholder="Şifre" required>
+        <input type="password" id="password" name="password" placeholder="Password" required>
         <br><br>
 
-        <input type="password" id="confirm_password" name="confirm_password" placeholder="Şifre Tekrar" required oninput="check(this)">
+        <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required oninput="check(this)">
         <br><br>
 
         <input type="checkbox" name="terms" id="terms" required>
         <label for="terms">
-            <a href="/terms" target="_blank">Hizmet Şartlarını</a> ve 
-            <a href="/privacy" target="_blank">Gizlilik Politikasını</a> okudum ve kabul ediyorum.
+            I have read and agree to the <a href="/terms" target="_blank">Terms of Service</a> and 
+            <a href="/privacy" target="_blank">Privacy Policy</a>.
         </label>
         <br><br>
 
-        <button type="submit">Kayıt Ol</button>
+        <button type="submit">Sign Up</button>
     </form>
 
     <script>
-        // Şifreler eşleşiyor mu kontrolü
+        // Check if passwords match
         function check(input) {
             if (input.value != document.getElementById('password').value) {
-                input.setCustomValidity('Şifreler eşleşmiyor!');
+                input.setCustomValidity('Passwords do not match!');
             } else {
                 input.setCustomValidity('');
             }
