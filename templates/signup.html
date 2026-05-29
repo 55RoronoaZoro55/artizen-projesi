@@ -4,10 +4,14 @@
     <meta charset="UTF-8">
     <title>Sign Up</title>
     <style>
-        body { background: #121212; color: white; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: sans-serif; }
+        body { background: #121212; color: white; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: sans-serif; margin: 0; }
         .form-box { background: #1e1e1e; padding: 40px; border-radius: 12px; width: 350px; text-align: center; }
-        input { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: none; box-sizing: border-box; }
-        .checkbox-group { font-size: 0.8rem; margin: 10px 0; text-align: left; line-height: 1.6; }
+        input[type="text"], input[type="email"], input[type="password"] { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: none; box-sizing: border-box; }
+        
+        .checkbox-group { font-size: 0.9rem; margin: 15px 0; text-align: left; }
+        .checkbox-item { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+        .checkbox-item input { width: auto; margin: 0; }
+        
         button { background: #e91e63; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold; margin-top: 10px; }
         a { color: #00ffcc; cursor: pointer; text-decoration: underline; }
     </style>
@@ -23,10 +27,14 @@
             <input type="password" name="confirm_password" placeholder="Confirm Password" required>
             
             <div class="checkbox-group">
-                <input type="checkbox" name="terms" required> 
-                I accept the <a onclick="openModal('terms-modal')">Terms of Service</a>.<br>
-                <input type="checkbox" name="marketing"> 
-                I agree to the <a onclick="openModal('privacy-modal')">Privacy & Marketing Policy</a>.
+                <div class="checkbox-item">
+                    <input type="checkbox" name="terms" required> 
+                    <span>I accept the <a onclick="openModal('terms-modal')">Terms of Service</a>.</span>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" name="marketing"> 
+                    <span>I agree to the <a onclick="openModal('privacy-modal')">Privacy & Marketing Policy</a>.</span>
+                </div>
             </div>
             
             <button type="submit">Sign Up</button>
