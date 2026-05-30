@@ -1,14 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
+    <meta charset="UTF-8">
+    <title>Ana Sayfa</title>
     <style>
         body {
-            background-color: rgb(30, 30, 30); /* İstediğin özel renk */
+            background-color: rgb(30, 30, 30);
             margin: 0;
             height: 100vh;
+            font-family: sans-serif;
+        }
+        .profile-img {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid white;
         }
     </style>
 </head>
 <body>
-    </body>
+
+    <img src="{{ url_for('static', filename='defaultprofilepicture.png') }}" 
+         class="profile-img" 
+         alt="Profil Resmi">
+
+</body>
 </html>
